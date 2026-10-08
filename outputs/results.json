@@ -1,0 +1,173 @@
+{
+  "split": {
+    "train": 170884,
+    "val": 42721,
+    "test": 71202
+  },
+  "imbalance_ablation": {
+    "none": {
+      "val": {
+        "pr_auc": 0.7561694886513466,
+        "roc_auc": 0.9753189671223721,
+        "no_skill_pr_auc": 0.0008894922871655626
+      },
+      "test": {
+        "pr_auc": 0.7642250307161005,
+        "roc_auc": 0.9686376072836165,
+        "no_skill_pr_auc": 0.0013201876351787872
+      }
+    },
+    "balanced": {
+      "val": {
+        "pr_auc": 0.7369614246260521,
+        "roc_auc": 0.9886772374555629,
+        "no_skill_pr_auc": 0.0008894922871655626
+      },
+      "test": {
+        "pr_auc": 0.7584630112812231,
+        "roc_auc": 0.9656250336617119,
+        "no_skill_pr_auc": 0.0013201876351787872
+      }
+    },
+    "smote": {
+      "val": {
+        "pr_auc": 0.7646496534972562,
+        "roc_auc": 0.9768026713457966,
+        "no_skill_pr_auc": 0.0008894922871655626
+      },
+      "test": {
+        "pr_auc": 0.7983925575915759,
+        "roc_auc": 0.9682905176303591,
+        "no_skill_pr_auc": 0.0013201876351787872
+      }
+    }
+  },
+  "model_comparison_test": {
+    "GradBoost (class-weighted)": {
+      "pr_auc": 0.7584630112812231,
+      "roc_auc": 0.9656250336617119,
+      "no_skill_pr_auc": 0.0013201876351787872,
+      "recall@precision>=0.5": 0.776595744680851,
+      "val_pr_auc": 0.7369614246260521
+    },
+    "LogReg (class-weighted)": {
+      "pr_auc": 0.7523129557508286,
+      "roc_auc": 0.9773887547739788,
+      "no_skill_pr_auc": 0.0013201876351787872,
+      "recall@precision>=0.5": 0.7978723404255319,
+      "val_pr_auc": 0.7306216431463068
+    },
+    "IsolationForest (unsup.)": {
+      "pr_auc": 0.07512856423336604,
+      "roc_auc": 0.9463878140413324,
+      "no_skill_pr_auc": 0.0013201876351787872,
+      "recall@precision>=0.5": 0.0,
+      "val_pr_auc": 0.03247513882156479
+    },
+    "Autoencoder (unsup.)": {
+      "pr_auc": 0.03399002732190249,
+      "roc_auc": 0.946050897705498,
+      "no_skill_pr_auc": 0.0013201876351787872,
+      "recall@precision>=0.5": 0.0,
+      "val_pr_auc": 0.016141391938631396
+    }
+  },
+  "cost_analysis_test": {
+    "naive thr=0.5": {
+      "threshold": 0.5,
+      "cost": 3614.0899999999997,
+      "tn": 71026,
+      "fp": 82,
+      "fn": 21,
+      "tp": 73,
+      "precision": 0.47096774193548385,
+      "recall": 0.776595744680851
+    },
+    "cost-optimal thr": {
+      "threshold": 0.3627089189550986,
+      "cost": 3795.23,
+      "tn": 70934,
+      "fp": 174,
+      "fn": 19,
+      "tp": 75,
+      "precision": 0.30120481927710846,
+      "recall": 0.7978723404255319
+    },
+    "approve everything": {
+      "cost": 12249.130000000001
+    },
+    "block everything": {
+      "cost": 355540.0
+    }
+  },
+  "cost_params": {
+    "FN_fixed": 15.0,
+    "FP_fixed": 5.0,
+    "FP_amount_frac": 0.0
+  },
+  "drift_scenarios": {
+    "natural later window": {
+      "retrain": true,
+      "reasons": [
+        "24% of features have PSI>0.25 (limit 20%)"
+      ],
+      "feature_share_alert": 0.2413793103448276,
+      "n_features_alert": 7,
+      "n_features_warn": 9,
+      "score_psi": 0.004337540691648637,
+      "mean_score_ref": 0.026011679471741524,
+      "mean_score_cur": 0.02552567846113102,
+      "top_drifted": [
+        "V1",
+        "V3",
+        "V28",
+        "V11",
+        "V25"
+      ],
+      "pr_auc_cur": 0.7584630112812231,
+      "pr_auc_rel_drop": -0.0291760001767817
+    },
+    "injected drift (mild, 0.3)": {
+      "retrain": true,
+      "reasons": [
+        "28% of features have PSI>0.25 (limit 20%)"
+      ],
+      "feature_share_alert": 0.27586206896551724,
+      "n_features_alert": 8,
+      "n_features_warn": 9,
+      "score_psi": 0.020950869930630965,
+      "mean_score_ref": 0.026011679471741524,
+      "mean_score_cur": 0.027184929820496785,
+      "top_drifted": [
+        "V1",
+        "V28",
+        "V3",
+        "V11",
+        "V25"
+      ],
+      "pr_auc_cur": 0.7553680276539594,
+      "pr_auc_rel_drop": -0.024976345318545215
+    },
+    "injected drift (severe, 1.0)": {
+      "retrain": true,
+      "reasons": [
+        "38% of features have PSI>0.25 (limit 20%)"
+      ],
+      "feature_share_alert": 0.3793103448275862,
+      "n_features_alert": 11,
+      "n_features_warn": 8,
+      "score_psi": 0.18074598602285707,
+      "mean_score_ref": 0.026011679471741524,
+      "mean_score_cur": 0.03147997637047596,
+      "top_drifted": [
+        "V10",
+        "V14",
+        "V1",
+        "V2",
+        "V28"
+      ],
+      "pr_auc_cur": 0.7280399215962828,
+      "pr_auc_rel_drop": 0.012105793779228236
+    }
+  }
+}
