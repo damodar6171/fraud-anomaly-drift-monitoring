@@ -22,7 +22,7 @@ outputs/               # generated: metrics, plots, CSV drift reports
 
 ## Setup
 ```bash
-git clone <your-repo-url> && cd fraud-drift-monitoring
+git clone https://github.com/damodar6171/fraud-anomaly-drift-monitoring.git && cd fraud-anomaly-drift-monitoring
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
