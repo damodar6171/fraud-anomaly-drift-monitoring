@@ -1,8 +1,5 @@
 # Write-up: Fraud Detection with Drift Monitoring
 
-*Fill the **[RESULT]** cells with the numbers printed by `python run_pipeline.py` on the real Kaggle data
-(`outputs/results.json`). Everything else is the design rationale and is final.*
-
 ## 1. Problem and approach
 Fraud patterns move (new attack tactics, seasonality), so a model trained once silently degrades. The system therefore
 has three parts: **detect** (supervised + unsupervised), **decide** (cost-based threshold), **watch itself** (drift monitor
